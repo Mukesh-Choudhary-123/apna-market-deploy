@@ -231,15 +231,31 @@ server.post(
   }
 );
 
-main().catch((err) => console.log(err));
+// main().catch((err) => console.log(err));
+
+// async function main() {
+//   await mongoose.connect(process.env.MONGODB_URL, {});
+//   console.log("Database connection successfully");
+//   console.log(
+//     "__________________________________________________________________"
+//   );
+// }
 
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URL, {});
-  console.log("Database connection successfully");
-  console.log(
-    "__________________________________________________________________"
-  );
+  try {
+    await mongoose.connect(process.env.MONGODB_URL);
+    console.log("Database connection successfully");
+    console.log(
+      "__________________________________________________________________"
+    );
+  } catch (err) {
+    console.error("Error connecting to MongoDB:", err.message);
+    console.error(err);
+    process.exit(1); // Exit the process with failure code
+  }
 }
+
+main().catch((err) => console.error("Main function error:", err));
 
 server.listen(8080, () => {
   console.log("server Started 8080");
