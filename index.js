@@ -231,16 +231,6 @@ server.post(
   }
 );
 
-// main().catch((err) => console.log(err));
-
-// async function main() {
-//   await mongoose.connect(process.env.MONGODB_URL, {});
-//   console.log("Database connection successfully");
-//   console.log(
-//     "__________________________________________________________________"
-//   );
-// }
-
 async function main() {
   try {
     await mongoose.connect(process.env.MONGODB_URL);
