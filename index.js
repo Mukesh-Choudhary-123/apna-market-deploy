@@ -7,6 +7,7 @@ const cors = require("cors");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const MongoStore = require("connect-mongo");
 const crypto = require("crypto");
 const { Strategy: JwtStrategy, ExtractJwt } = require("passport-jwt");
 const cookieParser = require("cookie-parser");
@@ -31,12 +32,15 @@ opts.secretOrKey = process.env.JWT_SECRET_KEY;
 server.use(express.static(path.resolve(__dirname, "build")));
 
 server.use(cookieParser());
+
 server.use(
   session({
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false, httpOnly: true, sameSite: "lax" },
+    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URL }),
+
     // store: new SQLiteStore({ db: "sessions.db", dir: "./var/db" }),
   })
 );
