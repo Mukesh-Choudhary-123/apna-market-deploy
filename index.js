@@ -236,7 +236,7 @@ async function main() {
     await mongoose.connect(process.env.MONGODB_URL);
     console.log("Database connection successfully");
     console.log(
-      "__________________________________________________________________"
+      "________________________________________________________________"
     );
   } catch (err) {
     console.error("Error connecting to MongoDB:", err.message);
