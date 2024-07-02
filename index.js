@@ -234,7 +234,10 @@ server.post(
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URL);
+  await mongoose.connect(process.env.MONGODB_URL, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  });
   console.log("Database connection successfully");
   console.log(
     "__________________________________________________________________"
