@@ -39,7 +39,7 @@ server.use(
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false, httpOnly: true, sameSite: "lax" },
-    store: MongoStore.create({ mongoUrl: process.env.MONGODB_URL }),
+    // store: MongoStore.create({ mongoUrl: process.env.MONGODB_URL }),
 
     // store: new SQLiteStore({ db: "sessions.db", dir: "./var/db" }),
   })
@@ -234,10 +234,7 @@ server.post(
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(process.env.MONGODB_URL, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-  });
+  await mongoose.connect(process.env.MONGODB_URL, {});
   console.log("Database connection successfully");
   console.log(
     "__________________________________________________________________"
